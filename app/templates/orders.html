@@ -1,0 +1,75 @@
+{% extends 'Layout.html' %}
+
+
+{% block body %}
+{% comment %} manu bar {% endcomment %}
+<div class="container_fluid  bg-danger">
+  <div class="container">
+   <div class="row">
+     <div class="col-2 d-flex p-1 text-white category" >
+      <div class="d-flex category">
+       <div class="my-1 category"><ion-icon name="list-outline"></ion-icon></div>
+       <div class="mx-2 category"> Categoris</div>
+      </div>
+     </div>
+     {% comment %} //menu {% endcomment %}
+     <div class="col-md-8 text-white d-md-flex justify-between justify-content-lg-between active " id="menu">
+       <a href="{% url 'home' %}"class="text-decoration-none text-white text add">HOME</a>
+       {% for categories in categories %}
+       <a href="{% url 'categpryProduct' categories.id %}"class="text-decoration-none text-white text ">{{categories.cname}} </a>
+       {% endfor %}
+       {% comment %} <a href="{% url 'Payment_page' %}"class="text-decoration-none text-white text">payments </a> {% endcomment %}
+       <a href="{% url 'Add_address_page' %}"class="text-decoration-none text-white text">add_address </a>
+       {% if request.session.id %}
+       <a href="{% url 'logout' %}"class="text-decoration-none text-white text add btn btn-primary">Logout</a>
+       {% else %}
+       <a href="{% url 'Login_page' %}"class="text-decoration-none text-white text add">LOGIN</a>
+       {% endif %}
+       </div>
+     <div class="col-1">
+       <button class="btn btn-danger button "><ion-icon name="menu-outline" class="icon"></ion-icon></button>
+     </div>
+   </div>
+
+   {% comment %} menu end {% endcomment %}
+  </div>
+ </div>
+
+{% comment %} ///end menu bar {% endcomment %}
+<div class="container">
+
+    <div class="row bg-white p-1 my-2 rounded">
+        <div class="col-3">
+         <div class="row p-md-2">
+            <img src="\media\images\women5.webp" alt="" class="h-md-25 w-md-25 h-sm-50 w-sm-50 w-50 h-50">
+         </div>
+        </div>
+        <div class="col-5">
+          <h4>womens feasion Cutton drases</h4>
+          <p>Conferm Order</p>
+          <p>Delivary in Today 9:00 am</p>
+          <button class="btn btn-sm btn-success mt-2">View deatels</button>
+        </div>
+    </div>
+
+    <div class="row bg-white p-1 my-2 rounded">
+        <div class="col-3">
+         <div class="row p-md-2">
+            <img src="\media\images\women5.webp" alt="" class="h-md-25 w-md-25 h-sm-50 w-sm-50 w-50 h-50">
+         </div>
+        </div>
+        <div class="col-5">
+          <h4>womens feasion Cutton drases</h4>
+          <p>Conferm Order</p>
+          <p>Delivary in Today 9:00 am</p>
+          <button class="btn btn-sm btn-success mt-2">View deatels</button>
+        </div>
+    </div>
+
+
+
+
+</div>
+    
+{% endblock body %}
+    

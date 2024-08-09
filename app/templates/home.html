@@ -1,0 +1,250 @@
+{% extends 'Layout.html'  %}
+ {% block body %}
+{% comment %} manu bar {% endcomment %}
+<div class="container_fluid  bg-danger">
+  <div class="container">
+   <div class="row">
+     <div class="col-2 d-flex p-1 text-white category" >
+      <div class="d-flex category">
+       <div class="my-1 category"><ion-icon name="list-outline"></ion-icon></div>
+       <div class="mx-2 category"> Categoris</div>
+      </div>
+     </div>
+     {% comment %} //menu {% endcomment %}
+     <div class="col-md-8 text-white d-md-flex justify-between justify-content-lg-between active " id="menu">
+       <a href="{% url 'home' %}"class="text-decoration-none text-white text add">HOME</a>
+       {% for categories in categories %}
+       <a href="{% url 'categpryProduct' categories.id %}"class="text-decoration-none text-white text ">{{categories.cname}} </a>
+       {% endfor %}
+       {% comment %} <a href="{% url 'Payment_page' %}"class="text-decoration-none text-white text">payments </a> {% endcomment %}
+       <a href="{% url 'Add_address_page' %}"class="text-decoration-none text-white text">add_address </a>
+       {% if request.session.id %}
+       <a href="{% url 'logout' %}"class="text-decoration-none text-white text add btn btn-primary">Logout</a>
+       {% else %}
+       <a href="{% url 'Login_page' %}"class="text-decoration-none text-white text add">LOGIN</a>
+       {% endif %}
+     </div>
+     <div class="col-1">
+       <button class="btn btn-danger button "><ion-icon name="menu-outline" class="icon"></ion-icon></button>
+     </div>
+   </div>
+
+   {% comment %} menu end {% endcomment %}
+  </div>
+ </div>
+
+{% comment %} ///end menu bar {% endcomment %}
+<div class="container">
+  <div class="row">
+    <div class="col-3  mr-2 sidebar" >
+    {% comment %} ## menu bar ////////// {% endcomment %}
+      <ul class="text-muted border-bottom bg-white">
+        {% for categories in categories %}
+        <li class="list-group border-bottom">
+          <a href="{% url 'categpryProduct' categories.id %}" class="font-monospace text-decoration-none  text-dark p-2">{{categories.cname}}</a >
+        </li>
+        {% endfor %}
+      </ul>
+      {% comment %} ##end menu bar/// {% endcomment %}
+
+      {% comment %} ////product part {% endcomment %}
+{% comment %} ///product {% endcomment %}
+{% for hotdill in hotdill %}
+<a href="{% url 'Single_product' hotdill.id %}" class="text-decoration-none text-dark">
+      <div class="row my-2">
+        <div class="col">
+          <div class="card">
+            <div class="row mx-2 p-1 border-bottom">
+              <h6>HOT DEALS</h6><br>
+              <p class="text-secandary">{{hotdill.pname}}</p>
+            </div>
+            <div class="row p-4">
+             
+              <img src="\media\{{hotdill.pimage}}" alt="" >
+              
+            </div>
+            <div class="row p-0 mx-auto p-2">
+              <p >{{hotdill.pname}}</p>
+              <del>total:{{hotdill.ptotal}}</del>
+              <p class="text-success">Price: {{hotdill.pprice}}</p>
+              <h5>{{hotdill.pdiscount}}% discount</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+</a>
+      {% comment %} ///end product {% endcomment %}
+      {% endfor %}
+      {% comment %} ///product {% endcomment %}
+
+    
+    </div>
+
+    <div class="col  p-2 ms-1">
+      {% comment %} //baner //////// {% endcomment %}
+     <div class="row bg-white py-2">
+
+      <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="\media\images\Ecommerce-Banner-1920.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>First slide label</h5>
+              <p>Some representative placeholder content for the first slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="\media\images\ecomerce_baner1.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Second slide label</h5>
+              <p>Some representative placeholder content for the second slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="\media\images\ecommerce-banner 2.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Third slide label</h5>
+              <p>Some representative placeholder content for the third slide.</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+     </div>
+     {% comment %} ///end banner {% endcomment %}
+
+     {% comment %} new products {% endcomment %}
+     <div class="row bg-white my-2">
+      <div class="col-12 border-bottom">
+        <div class="row d-flex justify-content-between">
+          <div class="col-4 px-4 pt-4">
+            <h6>NEW PRODUCTS</h6>
+          </div>
+          <div class="col-4 d-flex">
+            <p class="text-danger px-4 pt-4"><ion-icon name="caret-back-circle-outline"></ion-icon></p>
+            <p class="text-danger px-4 pt-4"><ion-icon name="caret-forward-circle"></ion-icon></p>
+          </div>
+        </div>
+      </div>
+      {% comment %} ///products {% endcomment %}
+      {% for product in product %}
+      <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-4 product">
+        <div class="row my-2">
+          <div class="col">
+            <a href="{% url 'Single_product' product.id %}" class="text-decoration-none text-dark">
+            <div class="card">
+              <div class="row p-4">
+                <img src="\media\{{product.pimage}}" alt="" >
+              </div>
+              <div class="row p-0 mx-auto">
+                <p >{{product.pname}}</p>
+                <del>total:{{product.ptotal}}</del>
+                <p class="text-success">Price: {{product.pprice}}</p>
+                <h6>{{product.pdiscount}}% discount</h6>
+              </div>
+            </div>
+          </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% comment %} ///end products {% endcomment %}
+     </div>
+       
+
+     {% comment %} ///offer start {% endcomment %}
+     <div class="row  border mt-1 bg-white">
+     <div class="col-8 p-2  mx-1 d-flex">
+          <div class="row">
+            <img src="\media\images\offer.webp" alt="">
+          </div>
+          <div class="row p-1">
+          <p>veritatis amet ullam asperiores omnis, perspiciatis  </p>
+          <div class="d-flex mx-2">
+            <h1>25%</h1>
+            <h3>Off</h3>
+          </div>
+          <button class="btn btn-secondary mx-3 btn-sm p-0">Check product</button>
+          </div>
+     </div>
+     </div>
+
+     <div class="row  border mt-1 bg-white">
+      <div class="col-8 p-2  mx-1 d-flex">
+           <div class="row">
+             <img src="\media\images\offer2.webp" alt="">
+           </div>
+           <div class="row p-1">
+           <p>veritatis amet ullam asperiores omnis, perspiciatis  </p>
+           <div class="d-flex mx-2">
+             <h1>35%</h1>
+             <h3>Off</h3>
+           </div>
+           <button class="btn btn-secondary mx-3 btn-sm p-0">Check product</button>
+           </div>
+      </div>
+      </div>
+{% comment %} ///offer end {% endcomment %}
+
+{% comment %} new products {% endcomment %}
+<div class="row bg-white my-2">
+  <div class="col-12 border-bottom">
+    <div class="row d-flex justify-content-between">
+      <div class="col-4 px-4 pt-4">
+        <h6>ALL PRODUCT</h6>
+      </div>
+      <div class="col-4 d-flex">
+        <p class="text-danger px-4 pt-4"><ion-icon name="caret-back-circle-outline"></ion-icon></p>
+        <p class="text-danger px-4 pt-4"><ion-icon name="caret-forward-circle"></ion-icon></p>
+      </div>
+    </div>
+  </div>
+  {% for oldproducts in oldproducts %}
+  {% comment %} ///products {% endcomment %}
+  <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-4 product">
+    <div class="row my-2">
+      <div class="col">
+        <a href="{% url 'Single_product' oldproducts.id %}" class="text-decoration-none text-dark">
+        <div class="card">
+          <div class="row p-4">
+            <img src="\media\{{oldproducts.pimage}}" alt="" >
+          </div>
+          <div class="row p-0 mx-auto">
+            <p >{{oldproducts.pname}}</p>
+            <del>total:{{oldproducts.ptotal}}</del>
+            <p class="text-success">Price: {{oldproducts.pprice}}</p>
+            <h6>{{oldproducts.pdiscount}}% discount</h6>
+          </div>
+        </div>
+      </a>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} ///end products {% endcomment %}
+  {% endfor %}
+   
+
+
+<a href="{% url 'products' %}" class="btn mb-5 pb-4 btn-sm">View All</a>
+ </div>
+ {% comment %} end  product {% endcomment %}
+     
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

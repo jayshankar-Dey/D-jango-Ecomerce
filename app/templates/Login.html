@@ -1,0 +1,30 @@
+{% extends 'Layout.html' %}
+
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 mx-auto p-3 bg-white border rounded my-5 shadow ">
+
+            <form action="{% url 'login_user' %}" method="post">
+              {% csrf_token %}
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control mt-1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" value="{{request.session.email}}">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control mt-1" id="exampleInputPassword1" placeholder="Password" name="password" value="{{request.session.password}}">
+                </div>
+               
+                <button type="submit" class="btn btn-danger mt-3">Login</button>
+                <a href="{% url 'Register_page' %}" class="btn text-success">dont have any account please Register</a>
+              </form>
+
+        </div>
+    </div>
+</div>
+    
+{% endblock body %}
+    

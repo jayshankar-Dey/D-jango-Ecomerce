@@ -1,0 +1,99 @@
+{% extends 'Layout.html' %}
+
+
+{% block body %}
+<style>
+    .input{
+        width: 30px;
+        border: none;
+        outline: none;
+    }
+</style>
+{% comment %} manu bar {% endcomment %}
+<div class="container_fluid  bg-danger">
+    <div class="container">
+     <div class="row">
+       <div class="col-2 d-flex p-1 text-white category" >
+        <div class="d-flex category">
+         <div class="my-1 category"><ion-icon name="list-outline"></ion-icon></div>
+         <div class="mx-2 category"> Categoris</div>
+        </div>
+       </div>
+       {% comment %} //menu {% endcomment %}
+       <div class="col-md-8 text-white d-md-flex justify-between justify-content-lg-between active " id="menu">
+         <a href="{% url 'home' %}"class="text-decoration-none text-white text add">HOME</a>
+         {% for categories in categories %}
+       <a href="{% url 'categpryProduct' categories.id %}"class="text-decoration-none text-white text ">{{categories.cname}} </a>
+       {% endfor %}
+         {% comment %} <a href="{% url 'Payment_page' %}"class="text-decoration-none text-white text">payments </a> {% endcomment %}
+         <a href="{% url 'Add_address_page' %}"class="text-decoration-none text-white text">add_address </a>
+         {% if request.session.id %}
+         <a href="{% url 'logout' %}"class="text-decoration-none text-white text add btn btn-primary">Logout</a>
+        {% else %}
+        <a href="{% url 'Login_page' %}"class="text-decoration-none text-white text add">LOGIN</a>
+        {% endif %}
+       </div>
+       <div class="col-1">
+         <button class="btn btn-danger button "><ion-icon name="menu-outline" class="icon"></ion-icon></button>
+       </div>
+     </div>
+  
+     {% comment %} menu end {% endcomment %}
+    </div>
+   </div>
+  
+  {% comment %} ///end menu bar {% endcomment %}
+<div class="container">
+
+{% for cart in cart %}
+    <div class="row bg-white p-1 my-2 rounded">
+        <div class="col-3">
+         <div class="row p-md-2">
+            <img src="\media\{{cart.pid.pimage}}" alt="" class="h-md-25 w-md-25 h-sm-50 w-sm-50 w-50 h-50">
+         </div>
+        </div>
+        <div class="col-5 p-0">
+          <h4>{{cart.pid.pname}}</h4>
+          <p class="p-0 m-0">{{cart.pid.pdes|slice:"80"}}</p>
+          {% if cart.psize %}
+          <p class="p-0 " style="color: orangered;">size: {{cart.psize}}</p>
+          {% endif %}
+          <h3>₹{{cart.pid.pprice}}</h3>
+          <div class="d-flex">
+            <a href="{% url 'Single_product' cart.pid.id %}"><button class="btn btn-sm btn-success mt-1">View deatels</button></a>
+            <a href="{% url 'removecart' cart.id %}"><button class="btn btn-sm btn-danger mt-1 mx-2">remove</button></a>
+          </div>
+        </div>
+        <div class="col-2 d-flex justify-content-center">
+           <div class="btn my-auto text-danger" ><button class="btn btn-light shadow py-0 text-danger mins" style="font-size: 30px; font-weight: bold;">-</button></div>
+           <div class="my-auto text-success value "><input type="text" class="input" value="1"></div>
+           <div class="btn  my-auto text-primary"><button class="btn btn-light shadow py-0 text-primary plus" value="1" style="font-size: 30px;font-weight: bold;">+</button></div>
+        </div>
+    </div>
+
+ {% endfor %}
+</div>
+<script>
+    $(document).ready(function(){
+       $(".plus").on("click",function(){
+        var a = +$(this).val();
+        var b= a+1;
+        $(this).val(b)
+        $(".input").val(a+1);
+       });
+       $(".mins").on("click",function(){
+        var a = +$(this).val();
+        var b= a-1;
+       if(b <= 0){
+        $(this).val(1)
+        $(".input").val(1);
+       }
+       else{
+        $(".input").val(a-1);
+       }
+       });
+    });
+</script>
+    
+{% endblock body %}
+    

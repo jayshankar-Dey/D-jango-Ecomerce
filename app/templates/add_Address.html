@@ -1,0 +1,84 @@
+{% extends 'Layout.html' %}
+
+
+{% block body %}
+{% comment %} manu bar {% endcomment %}
+<div class="container_fluid  bg-danger">
+  <div class="container">
+   <div class="row">
+     <div class="col-2 d-flex p-1 text-white category" >
+      <div class="d-flex category">
+       <div class="my-1 category"><ion-icon name="list-outline"></ion-icon></div>
+       <div class="mx-2 category"> Categoris</div>
+      </div>
+     </div>
+     {% comment %} //menu {% endcomment %}
+     <div class="col-md-8 text-white d-md-flex justify-between justify-content-lg-between active " id="menu">
+       <a href="{% url 'home' %}"class="text-decoration-none text-white text add">HOME</a>
+       {% for categories in categories %}
+       <a href="{% url 'categpryProduct' categories.id %}"class="text-decoration-none text-white text ">{{categories.cname}} </a>
+       {% endfor %}
+       {% comment %} <a href="{% url 'Payment_page' %}"class="text-decoration-none text-white text">payments </a> {% endcomment %}
+       <a href="{% url 'Add_address_page' %}"class="text-decoration-none text-white text">add_address </a>
+       {% if request.session.id %}
+       <a href="{% url 'logout' %}"class="text-decoration-none text-white text add btn btn-primary">Logout</a>
+       {% else %}
+       <a href="{% url 'Login_page' %}"class="text-decoration-none text-white text add">LOGIN</a>
+       {% endif %}
+     </div>
+     <div class="col-1">
+       <button class="btn btn-danger button "><ion-icon name="menu-outline" class="icon"></ion-icon></button>
+     </div>
+   </div>
+
+   {% comment %} menu end {% endcomment %}
+  </div>
+ </div>
+
+{% comment %} ///end menu bar {% endcomment %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 mx-auto p-3 bg-white border rounded my-5 shadow ">
+
+            <form action="{% url 'address' %}" method="post">
+              {% csrf_token %}
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Enter Pin</label>
+                  <input type="number" class="form-control mt-1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Pincode" name="pin">
+                  <small id="emailHelp" class="form-text text-muted">Please fill the blank propraly.</small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">City</label>
+                  <input type="text" class="form-control mt-1" id="exampleInputPassword1" placeholder="Enter city name" name="city">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Address</label>
+
+                    <textarea class="form-control mt-1" name="address" rowcount="5" id="" cols="30" rows="10" style="resize: none;" ></textarea>
+                    
+                  </div>
+               
+                <button type="submit" class="btn btn-info mt-3">Save address</button>
+                <a href="{% url 'home' %}" class="btn text-success">go to Home page</a>
+              </form>
+
+
+
+        </div>
+    </div>
+    {% for addres in addres %}
+    <div class="row">
+      <div class="col-md-5 mx-auto p-3 bg-white border rounded my-1 shadow">
+       <h5>pin: {{addres.pin}}</h5>
+       <h6>City: {{addres.city}}</h6>
+       <p>address: {{addres.addres}}</p>
+       <a href="{% url 'address_delete' addres.id %}" class="text-decoration-none text-danger border shadow rounded p-1 ">X</a>
+      </div> 
+    </div>
+    {% endfor %}
+</div>
+        
+    
+{% endblock body %}
+    

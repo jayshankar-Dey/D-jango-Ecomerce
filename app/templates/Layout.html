@@ -1,0 +1,212 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home</title>
+    {% comment %} <script src="https://cdn.tailwindcss.com"></script> {% endcomment %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </head>
+  <style>
+.cart{
+  border: 1px solid white;
+  border-radius: 70px;
+  font-size: 15px;
+}
+.text{
+  color: beige;
+}
+@media screen and (min-width: 250px) {
+  .category {
+    display: none;
+  }
+  #menu{
+    justify-content: center;
+    text-align: center;
+    transition: all 0.5s;
+  }
+  #menu a{
+   display: block;
+   padding: 10px;
+  }
+  #menu a:hover{
+    background: lightcoral;
+    transition: all 0.5s;
+   }
+  
+   .active{
+    display: none;
+    transition: all 0.5s;
+   }
+   .add{
+    background: lightcoral;
+  }
+  .sidebar{
+    display: none;
+  }
+ 
+}
+@media screen and (min-width: 1070px) {
+  .category {
+    display: block;
+  }
+  .button{
+    display:none
+  }
+ 
+}
+@media screen and (min-width: 770px) {
+  .category {
+    display: block;
+  }
+  .button{
+    display:none
+  }
+  .sidebar{
+    display: block;
+  }
+  
+}
+@media screen and (max-width: 442px) {
+     .product{
+      width: 200px;
+     }
+}
+@media screen and (max-width: 228px) {
+  .product{
+   width: 200px;
+   margin-left: auto;
+  }
+}
+.clicksize{
+  border: none;
+  background: none;
+  font-weight: bold;
+  color: orangered;
+}
+  </style>
+  <body style="background: gainsboro;">
+    <header class="sticky-top">
+    <div class="container_fluid bg-dark">
+      <div class="container bg-dark p-3 ">
+        <div class="row">
+          <div class="col-md-3 d-flex font-monospace">
+           <h3 class=" text-white">Market</h3>
+           <h3 class=" text-danger">Supply</h3>
+          </div>
+          <div class="col d-flex">
+            <form action="{% url 'search' %}" method="post">
+              {% csrf_token %}
+            <div class="input-group flex-nowrap">
+              <input type="text" class="form-control" placeholder="Searchproducts.." aria-label="Username" aria-describedby="addon-wrapping" name="search" />
+              <button class="input-group-text bg-danger text-white px-4 " id="addon-wrapping"><ion-icon name="search-outline"></ion-icon></button>
+            </div>
+          </form>
+            <div>
+               <a href="{% url 'Cart_page' %}"> <button class=" p-2 bg-danger text-white  mx-3 cart" ><ion-icon name="cart-outline"></ion-icon></button></a>
+            
+            </div>
+           <a href="{% url 'Orders_page' %}" class="text-light bg-danger text-whit cart btn"><ion-icon name="bag" class="text-white"></ion-icon></a> <br>
+           <a href="{% url 'grocory_page' %}" class="text-light bg-danger text-whit cart btn mx-2" ><ion-icon name="bag-handle-outline"></ion-icon></a> <br>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %} menu part start {% endcomment %}
+
+   
+</header>
+{% comment %} end header {% endcomment %}
+
+
+{% block body %}
+  
+{% endblock body %}
+  
+
+{% comment %} ///footer///////// {% endcomment %}
+<footer>
+
+  <div class="container-fluid bg-dark text-white ">
+    <footer class="py-5">
+      <div class="row">
+        <div class="col-2">
+          <h5>Section</h5>
+          <ul class="nav flex-column text-white">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted ">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+  
+        <div class="col-2">
+          <h5>Section</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+  
+        <div class="col-2">
+          <h5>Section</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          </ul>
+        </div>
+  
+        <div class="col-4 offset-1">
+          <form>
+            <h5>Subscribe to our newsletter</h5>
+            <p>Monthly digest of whats new and exciting from us.</p>
+            <div class="d-flex w-100 gap-2">
+              <label for="newsletter1" class="visually-hidden">Email address</label>
+              <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+              <button class="btn btn-danger" type="button">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+  
+      <div class="d-flex justify-content-between py-4 my-4 border-top">
+        <p>© 2021 Company, Inc. All rights reserved.</p>
+        <ul class="list-unstyled d-flex">
+          <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+          <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+          <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+        </ul>
+      </div>
+    </footer>
+  </div>
+
+</footer>
+<script>
+  $(document).ready(function(){
+    $(".button").click(function(){
+      $("#menu").toggleClass("active");
+    });
+    $( "a" ).on( "click", function() {
+      $( this ).toggleClass("add");
+    });
+    $(".size").on("click",function(){
+      $(".psize").val($(this).val())
+      $(".clicksize").html($(this).val())
+    })
+  });
+  
+</script>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+{% extends 'Layout.html' %}
+
+
+{% block body %}
+{% comment %} manu bar {% endcomment %}
+<div class="container_fluid  bg-danger">
+    <div class="container">
+     <div class="row">
+       <div class="col-2 d-flex p-1 text-white category" >
+        <div class="d-flex category">
+         <div class="my-1 category"><ion-icon name="list-outline"></ion-icon></div>
+         <div class="mx-2 category"> Categoris</div>
+        </div>
+       </div>
+       {% comment %} //menu {% endcomment %}
+       <div class="col-md-8 text-white d-md-flex justify-between justify-content-lg-between active " id="menu">
+         <a href="{% url 'home' %}"class="text-decoration-none text-white text add">HOME</a>
+         {% for categories in categories %}
+         <a href="{% url 'categpryProduct' categories.id %}"class="text-decoration-none text-white text ">{{categories.cname}} </a>
+         {% endfor %}
+         {% comment %} <a href="{% url 'Payment_page' %}"class="text-decoration-none text-white text">payments </a> {% endcomment %}
+         <a href="{% url 'Add_address_page' %}"class="text-decoration-none text-white text">add_address </a>
+         {% if request.session.id %}
+       <a href="{% url 'logout' %}"class="text-decoration-none text-white text add btn btn-primary">Logout</a>
+       {% else %}
+       <a href="{% url 'Login_page' %}"class="text-decoration-none text-white text add">LOGIN</a>
+       {% endif %}
+       </div>
+       <div class="col-1">
+         <button class="btn btn-danger button "><ion-icon name="menu-outline" class="icon"></ion-icon></button>
+       </div>
+     </div>
+  
+     {% comment %} menu end {% endcomment %}
+    </div>
+   </div>
+  
+  {% comment %} ///end menu bar {% endcomment %}
+ 
+<div class="container mt-1">
+     {% for product in product %}
+    <div class="row p-2 bg-white rounded">
+     <div class="col-md-6 ">
+ 
+         <div class="row  px-5 mt-3 mx-auto">
+             <div class="card ml-5" style="width: 18rem;">
+                 <img src="\media\{{product.pimage}}" class="card-img-top" alt="...">  
+             </div>
+            
+         </div>
+ 
+     </div>
+ 
+     <div class="col-md-6 p-4">
+     <p>{{product.pdes}}</p>
+     <h4>{{product.pname}}</h4>
+     <h5>size</h5>
+     <div class="row">
+        <div class="col-2 bg-dark text-white rounded border text-center py-2  mx-1">{{request.session.psize}}</div>
+         
+     </div>
+     <del>MRP:  {{product.ptotal}}</del>
+     <h2>discount: {{product.pdiscount}}%</h2>
+      <h3 class="text-success">price: {{product.pprice}}</h3>
+      <div class="d-flex p-1">
+      </div>
+     </div>
+     {% endfor %}
+     <div class="row">
+          <div class="col-12 p-2 mt-1 border bg-light"> <h4>payment method</h4></div>
+          <div class="col-md-6 p-4">
+            <h5>chose address</h5>
+      {% for addres in addres %}
+           <div class="row">
+            <div class="">
+                <input type="radio" id="address">
+                <label for="address "  class="mt-3 mx-2">
+                   {{addres.pin}}
+                </label>
+                <div class="d-flex"><p class="mx-2"> {{addres.city}} </p>
+                    <p> {{addres.addres}}</p></div>
+            </div>
+           </div>
+           {% endfor %}     
+
+          </div>
+
+          <div class="col-md-6 p-4">
+           <h6>Chose payment </h6>
+            <div class="row">
+                <div class="d-flex">
+                    <input type="radio" id="case_on_dalivary">
+                    <label for="case_on_dalivary "  class=" mx-2">
+                        Case on dalivary
+                    </label>
+                </div>
+               </div>
+
+               <div class="row">
+                <div class="d-flex">
+                    <input type="radio" id="case_on_dalivary">
+                    <label for="case_on_dalivary "  class=" mx-2">
+                      Cradit card
+                    </label>
+                </div>
+               </div>
+
+               <button class="btn btn-danger mt-3 btn-sm">Conferm Order</button>
+            
+          </div>
+     </div>
+
+
+    </div>
+</div>
+    
+{% endblock body %}
+    
